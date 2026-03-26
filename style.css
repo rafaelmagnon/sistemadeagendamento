@@ -1,0 +1,38 @@
+/* Define o estilo base do corpo da página */
+body {
+    font-family: Arial;         /* Define a fonte do texto como Arial */
+    background: #111;           /* Cor de fundo escura */
+    color: #fff;                /* Cor do texto branca */
+    padding: 20px;              /* Espaço interno ao redor do conteúdo */
+}
+
+/* Estilo aplicado aos campos de entrada e ao botão */
+input, button {
+    padding: 8px;               /* Espaço interno para melhorar a usabilidade */
+    margin: 5px 0;              /* Espaçamento vertical entre os elementos */
+    width: 100%;                /* Largura total do contêiner pai */
+    border: none;               /* Remove bordas padrão */
+    border-radius: 5px;         /* Bordas arredondadas */
+    background: #222;           /* Fundo escuro para inputs e botão */
+    color: #fff;                /* Cor do texto branca */
+}
+
+/* Estilo específico para o botão */
+button {
+    background-color: #6200ea;              /* Cor roxa para o botão */
+    color: #fff;                             /* Cor do texto branca */
+    cursor: pointer;                         /* Altera o cursor para uma mãozinha */
+    transition: background-color 0.3s ease;  /* Suaviza a transição de cor no hover */
+}
+
+/* Estilo ao passar o mouse sobre o botão */
+button:hover {
+    background-color: #3700b3; /* Muda para um tom mais escuro de roxo */
+}
+
+/* Estilo da seção onde aparecem os agendamentos */
+.agendamento {
+    margin-top: 20px;           /* Espaço acima da seção de agendamentos */
+    border-top: 1px solid #555; /* Linha separadora no topo da seção */
+    padding-top: 10px;          /* Espaço interno acima do primeiro item da lista */
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html> <!-- Define que este é um documento HTML5 -->
+<html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna o layout responsivo para dispositivos móveis -->
+    <title>Sistema de Agendamento</title> <!-- Define o título da aba do navegador -->
+    <link rel="stylesheet" href="style.css"> <!-- Importa o arquivo CSS com os estilos -->
+</head>
+
+<body> <!-- Início do conteúdo visível da página -->
+
+    <h2>Agendamento</h2> <!-- Título da seção de agendamento -->
+
+    <!-- Campo de entrada de texto para o nome do usuário -->
+    <input type="text" id="nome" placeholder="Seu nome">
+
+    <!-- Campo de entrada para escolher a data -->
+    <input type="date" id="data">
+
+    <!-- Campo de entrada para escolher o horário -->
+    <input type="time" id="hora">
+
+    <!-- Botão que dispara a função 'agendar' ao ser clicado -->
+    <button onclick="agendar()">Agendar</button>
+
+    <!-- Área onde os agendamentos aparecerão -->
+    <div class="agendamento" id="listaAgendamentos">
+        <h3>Agendamentos:</h3> <!-- Subtítulo da lista -->
+        <!-- Os agendamentos serão adicionados aqui via JavaScript -->
+    </div>
+
+    <!-- Importa o script JavaScript ao final do body (boa prática) -->
+    <script src="script.js"></script>
+</body>
+</html>
