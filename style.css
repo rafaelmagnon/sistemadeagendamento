@@ -1,38 +1,244 @@
-/* Define o estilo base do corpo da página */
+/* ==========================================================
+   Variáveis
+   ========================================================== */
+:root {
+    --fundo: #0d0b14;
+    --vidro: rgba(255, 255, 255, 0.05);
+    --borda: rgba(255, 255, 255, 0.12);
+    --roxo: #7c3aed;
+    --roxo-claro: #a855f7;
+    --roxo-escuro: #5b21b6;
+    --texto: #f4f2fb;
+    --texto-suave: #a8a3bd;
+    --transicao: 0.25s ease;
+}
+ 
+/* ==========================================================
+   Reset e base
+   ========================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+ 
+html {
+    min-height: 100%;
+    background:
+        radial-gradient(circle at 15% 0%, #2d1563 0%, transparent 50%),
+        radial-gradient(circle at 90% 100%, #3b1a7a 0%, transparent 45%),
+        var(--fundo);
+    background-attachment: fixed;
+}
+ 
+/* O body vira um card de vidro centralizado com grid de 2 colunas */
 body {
-    font-family: Arial;         /* Define a fonte do texto como Arial */
-    background: #111;           /* Cor de fundo escura */
-    color: #fff;                /* Cor do texto branca */
-    padding: 20px;              /* Espaço interno ao redor do conteúdo */
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    color: var(--texto);
+    line-height: 1.5;
+ 
+    max-width: 480px;
+    margin: clamp(16px, 6vw, 56px) auto;
+    padding: clamp(20px, 5vw, 32px);
+ 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+ 
+    background: var(--vidro);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+ 
+    animation: entrada 0.7s ease-out both;
 }
-
-/* Estilo aplicado aos campos de entrada e ao botão */
-input, button {
-    padding: 8px;               /* Espaço interno para melhorar a usabilidade */
-    margin: 5px 0;              /* Espaçamento vertical entre os elementos */
-    width: 100%;                /* Largura total do contêiner pai */
-    border: none;               /* Remove bordas padrão */
-    border-radius: 5px;         /* Bordas arredondadas */
-    background: #222;           /* Fundo escuro para inputs e botão */
-    color: #fff;                /* Cor do texto branca */
-}
-
-/* Estilo específico para o botão */
-button {
-    background-color: #6200ea;              /* Cor roxa para o botão */
-    color: #fff;                             /* Cor do texto branca */
-    cursor: pointer;                         /* Altera o cursor para uma mãozinha */
-    transition: background-color 0.3s ease;  /* Suaviza a transição de cor no hover */
-}
-
-/* Estilo ao passar o mouse sobre o botão */
-button:hover {
-    background-color: #3700b3; /* Muda para um tom mais escuro de roxo */
-}
-
-/* Estilo da seção onde aparecem os agendamentos */
+ 
+/* Elementos que ocupam a linha inteira; data e hora ficam lado a lado */
+h2,
+#nome,
+button,
 .agendamento {
-    margin-top: 20px;           /* Espaço acima da seção de agendamentos */
-    border-top: 1px solid #555; /* Linha separadora no topo da seção */
-    padding-top: 10px;          /* Espaço interno acima do primeiro item da lista */
+    grid-column: 1 / -1;
 }
+ 
+/* ==========================================================
+   Título
+   ========================================================== */
+h2 {
+    font-size: clamp(1.5rem, 4vw + 0.5rem, 1.9rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #ffffff, #c4a1ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+ 
+h2::before {
+    content: "📅 ";
+    -webkit-text-fill-color: initial;
+}
+ 
+/* ==========================================================
+   Campos e botão
+   ========================================================== */
+input,
+button {
+    font-family: inherit;
+    font-size: 1rem;
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: var(--texto);
+}
+ 
+input {
+    color-scheme: dark; /* ícones de data/hora ficam claros */
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--borda);
+    outline: none;
+    transition: border-color var(--transicao), box-shadow var(--transicao),
+                background var(--transicao), transform var(--transicao);
+}
+ 
+input::placeholder {
+    color: var(--texto-suave);
+}
+ 
+input:hover {
+    background: rgba(255, 255, 255, 0.09);
+}
+ 
+input:focus {
+    border-color: var(--roxo-claro);
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.25);
+}
+ 
+button {
+    border: none;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--roxo), var(--roxo-claro));
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+    transition: transform var(--transicao), box-shadow var(--transicao),
+                filter var(--transicao);
+}
+ 
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 12px 26px rgba(124, 58, 237, 0.5);
+}
+ 
+button:active {
+    transform: translateY(0) scale(0.98);
+}
+ 
+button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+ 
+/* ==========================================================
+   Lista de agendamentos
+   ========================================================== */
+.agendamento {
+    margin-top: 8px;
+    padding-top: 18px;
+    border-top: 1px solid var(--borda);
+}
+ 
+.agendamento h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--texto-suave);
+    margin-bottom: 12px;
+}
+ 
+/* Cada agendamento vira um cartão */
+.agendamento p {
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-left: 4px solid var(--roxo-claro);
+    border-radius: 12px;
+    animation: entradaItem 0.4s ease-out both;
+    transition: transform var(--transicao), background var(--transicao);
+}
+ 
+.agendamento p:hover {
+    transform: translateX(4px);
+    background: rgba(124, 58, 237, 0.2);
+}
+ 
+/* Mensagem quando ainda não há nada agendado */
+.agendamento:not(:has(p))::after {
+    content: "Nenhum agendamento ainda.";
+    display: block;
+    padding: 18px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+    border: 1px dashed var(--borda);
+    border-radius: 12px;
+}
+ 
+/* ==========================================================
+   Animações
+   ========================================================== */
+@keyframes entrada {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+@keyframes entradaItem {
+    from {
+        opacity: 0;
+        transform: translateX(-16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+ 
+/* ==========================================================
+   Responsividade e acessibilidade
+   ========================================================== */
+@media (max-width: 420px) {
+    body {
+        grid-template-columns: 1fr;
+        border-radius: 16px;
+    }
+}
+ 
+@media (hover: none) {
+    button:hover,
+    .agendamento p:hover {
+        transform: none;
+    }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+ 
